@@ -1,0 +1,50 @@
+admin account:
+admin
+admin123
+
+teacher account:
+
+
+ensure the timezine = Asia/Manila
+and plus time on device
+
+make https:
+cd C:\xampp\apache\bin
+openssl req -config ../conf/openssl.cnf -new -x509 -days 365 -sha256 -newkey rsa:2048 -nodes -keyout server.key -out server.crt
+
+When prompted, fill in these details:
+Country Name: Your country code (e.g., PH)
+State: Your state
+Locality: Your city
+Organization Name: Your org name
+Organizational Unit: Your department
+Common Name: localhost
+Email: Your email
+
+
+move the files:
+
+move server.crt ..\conf\ssl.crt
+move server.key ..\conf\ssl.key
+
+Edit the SSL configuration file:
+SSLCertificateFile "conf/ssl.crt/server.crt"
+SSLCertificateKeyFile "conf/ssl.key/server.key"
+
+Find and uncomment these lines (remove the #):
+LoadModule ssl_module modules/mod_ssl.so
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+Include conf/extra/httpd-ssl.conf
+
+
+restart apache:
+
+now site could be accessed:
+https://localhost/your directory
+
+MAKE SURE THAT TIMEZONE IS SET TO YOUR TIMEZONE example: PH/Manila
+note: make the adding of studens on the admin sent email as well like on the teacher's function.
+
+IMPORTANT! SET THE TIME IN THE PHP.INI TO TIMEZONE ASIA/MANILA
+UNCOMMENT THE EXTENSION=GD IN THE PHP.INI
+UNCOMMENT THE EXTENSION=ZIP IN THE PHP.INI
